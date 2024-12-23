@@ -77,18 +77,19 @@ function MainView*click_add_ok(comp, info, e)
 	
 	
 	console.log(sessionStorage.getItem(`dataList${this.cnt}`));
+	console.log(JSON.parse(sessionStorage.getItem(`dataList${this.cnt}`)).title);
+	let dataOne = JSON.parse(sessionStorage.getItem(`dataList${this.cnt}`));
 	
-	
-	/* 복사
+	// 아이템 복사
 	(function deepCopy(idNum){
 		const copyDiv = document.getElementById('_1--line');
 		
-		console.log(idNum);
+		console.log(dataOne);
 		
 		// 노드 복사하기
 		const newNode = copyDiv.cloneNode(true);
 		
-		copyDiv.id = 'line' + idNum;
+		copyDiv.id = 'line' + dataOne.cnt;
 		
 		newNode.style.display = 'block';
 		
@@ -98,15 +99,15 @@ function MainView*click_add_ok(comp, info, e)
 		
 		
 		
-		aviewElements[0].innerText = '1'; 
-		aviewElements[1].innerText = '2'; 
-		aviewElements[2].innerText = '3'; 
-		aviewElements[3].innerText = '4';
-		aviewElements[4].innerText = '5'; 
+		aviewElements[0].innerText = dataOne.cnt; 
+		aviewElements[1].innerText = dataOne.title; 
+		aviewElements[2].innerText = dataOne.text; 
+		aviewElements[3].innerText = dataOne.name;
+		aviewElements[4].innerText = dataOne.time; 
 		
 		
 		copyDiv.after(newNode);
-	}(this.idNum++));*/
+	}(dataOne));
 	
 };
 

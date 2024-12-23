@@ -91,7 +91,13 @@ MainView.prototype.click_add_ok = function(comp, info, e)
 		
 		copyDiv.id = 'line' + dataOne.cnt;
 		
+		
+		
 		newNode.style.display = 'block';
+		newNode.style.textAlign = 'center';
+		newNode.style.paddingTop = '19px';
+		newNode.style.fontSize = '16px';
+		
 		
 		
 		// aview

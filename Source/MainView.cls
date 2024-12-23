@@ -91,14 +91,20 @@ function MainView*click_add_ok(comp, info, e)
 		
 		copyDiv.id = 'line' + dataOne.cnt;
 		
+		
+		// css 값 주기
 		newNode.style.display = 'block';
+		newNode.style.textAlign = 'center';
+		newNode.style.paddingTop = '19px';
+		newNode.style.fontSize = '16px';
+		
 		
 		
 		// aview
 		const aviewElements = newNode.getElementsByClassName('AView-Style');
 		
 		
-		
+		// 복사한 각 항목별로 값 넣기
 		aviewElements[0].innerText = dataOne.cnt; 
 		aviewElements[1].innerText = dataOne.title; 
 		aviewElements[2].innerText = dataOne.text; 

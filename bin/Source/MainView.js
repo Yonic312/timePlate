@@ -7,6 +7,7 @@ function MainView()
 {
 	AView.call(this);
 
+	this.cnt = 1;
 	// 라인 추가(글 복사)
 	this.idNum = 1;
 
@@ -61,9 +62,24 @@ MainView.prototype.click_write_button = function(comp, info, e)
 
 MainView.prototype.click_add_ok = function(comp, info, e)
 {
-
+	const time = new Date();
+	
+	let dataList = {
+		title : this.add_title.getText(),
+		name : this.add_user.getText(),
+		text : this.add_text.getText(),
+		cnt : this.cnt,
+		time : time.getFullYear() + '-' + time.getMonth() + '-' + time.getDate() + ' ' + time.getHours() + ":" + time.getMinutes()
+	};
+	
+	sessionStorage.setItem(`dataList${this.cnt}`,JSON.stringify(dataList));
 	
 	
+	
+	console.log(sessionStorage.getItem(`dataList${this.cnt}`));
+	
+	
+	/* 복사
 	(function deepCopy(idNum){
 		const copyDiv = document.getElementById('_1--line');
 		
@@ -82,15 +98,15 @@ MainView.prototype.click_add_ok = function(comp, info, e)
 		
 		
 		
-		aviewElements[0].innerText = '1'; // 예시로 텍스트 변경
-		aviewElements[1].innerText = '2'; // 예시로 텍스트 변경
-		aviewElements[2].innerText = '3'; // 예시로 텍스트 변경
-		aviewElements[3].innerText = '4'; // 예시로 텍스트 변경
-		aviewElements[4].innerText = '5'; // 예시로 텍스트 변경
+		aviewElements[0].innerText = '1'; 
+		aviewElements[1].innerText = '2'; 
+		aviewElements[2].innerText = '3'; 
+		aviewElements[3].innerText = '4';
+		aviewElements[4].innerText = '5'; 
 		
 		
 		copyDiv.after(newNode);
-	}(this.idNum++));
+	}(this.idNum++));*/
 	
 };
 

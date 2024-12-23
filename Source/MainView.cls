@@ -7,6 +7,7 @@ class MainView()
 {
 	super();
 
+	this.cnt = 1;
 	// 라인 추가(글 복사)
 	this.idNum = 1;
 
@@ -61,9 +62,21 @@ function MainView*click_write_button(comp, info, e)
 
 function MainView*click_add_ok(comp, info, e)
 {
-
+	const time = new Date();
+	
+	let dataList = {
+		title : this.add_title.getText(),
+		name : this.add_user.getText(),
+		text : this.add_text.getText(),
+		cnt : this.cnt,
+		time : time.getFullYear() + '-' + time.getMonth() + '-' + time.getDate() + ' ' + time.getHours() + ":" + time.getMinutes()
+	};
+	
+	sessionStorage.setItem(`dataList${this.cnt}`,JSON.stringify(dataList));
 	
 	
+	
+	console.log(sessionStorage.getItem(`dataList${this.cnt}`));
 	
 	
 	/* 복사

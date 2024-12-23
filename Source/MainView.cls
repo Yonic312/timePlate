@@ -64,6 +64,9 @@ function MainView*click_add_ok(comp, info, e)
 
 	
 	
+	
+	
+	/* 복사
 	(function deepCopy(idNum){
 		const copyDiv = document.getElementById('_1--line');
 		
@@ -76,7 +79,51 @@ function MainView*click_add_ok(comp, info, e)
 		
 		newNode.style.display = 'block';
 		
+		
+		// aview
+		const aviewElements = newNode.getElementsByClassName('AView-Style');
+		
+		
+		
+		aviewElements[0].innerText = '1'; 
+		aviewElements[1].innerText = '2'; 
+		aviewElements[2].innerText = '3'; 
+		aviewElements[3].innerText = '4';
+		aviewElements[4].innerText = '5'; 
+		
+		
 		copyDiv.after(newNode);
-	}(this.idNum++));
+	}(this.idNum++));*/
 	
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -76,7 +76,51 @@ MainView.prototype.click_add_ok = function(comp, info, e)
 		
 		newNode.style.display = 'block';
 		
+		
+		// aview
+		const aviewElements = newNode.getElementsByClassName('AView-Style');
+		
+		
+		
+		aviewElements[0].innerText = '1'; // 예시로 텍스트 변경
+		aviewElements[1].innerText = '2'; // 예시로 텍스트 변경
+		aviewElements[2].innerText = '3'; // 예시로 텍스트 변경
+		aviewElements[3].innerText = '4'; // 예시로 텍스트 변경
+		aviewElements[4].innerText = '5'; // 예시로 텍스트 변경
+		
+		
 		copyDiv.after(newNode);
 	}(this.idNum++));
 	
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -49,6 +49,7 @@ MainView.prototype.init = function(context, evtListener) {
         });
         
     } else {
+        
         const allData = [];
         const filteredData = [];
         
@@ -182,17 +183,27 @@ MainView.prototype.click_edit_ok = function(comp, info, e) {
         const value = sessionStorage.getItem(key);
         
         // 세션에 저장된 값이 JSOn 문자열일 경우 파싱한다
-        const parsedValue = JSON.parse(value);
+        if (value && value.trim() !== '') {
+			const parsedValue = JSON.parse(value);
+			updateSessionData(parsedValue, key);
+			
+        } else{
+			const parsedValue = value;
+			updateSessionData(parsedValue, key);
+		}
+	function updateSessionData(parsedValue, key){
+		// 배열에서 특정 cnt 값을 찾아서 수정한다
+			if (parsedValue.cnt == this.cntS) {
+				parsedValue.title = this.edit_title.getText();
+				parsedValue.text = this.edit_text.getText();
+				parsedValue.name = this.edit_user.getText();
+				parsedValue.time = nowTime;
+
+				sessionStorage.setItem(key, JSON.stringify(parsedValue));
+			}
+	}
+		
         
-        // 배열에서 특정 cnt 값을 찾아서 수정한다
-        if (parsedValue.cnt == this.cntS) {
-            parsedValue.title = this.edit_title.getText();
-            parsedValue.text = this.edit_text.getText();
-            parsedValue.name = this.edit_user.getText();
-            parsedValue.time = nowTime;
-            
-            sessionStorage.setItem(key, JSON.stringify(parsedValue));
-        }
     });
     
     location.reload(); // 캐시된 페이지를 로딩

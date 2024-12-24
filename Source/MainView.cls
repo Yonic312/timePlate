@@ -13,6 +13,8 @@ class MainView()
 	
 	this.cntS = 0;
 	this.column = 0;
+	
+	this.searchKeyword = '';
 
 }
 extends AView;
@@ -25,33 +27,94 @@ function MainView*init(context, evtListener)
 	const time = new Date();
 	const nowTime = time.getFullYear() + '-' + time.getMonth() + '-' + time.getDate() + ' ' + time.getHours() + ":" + time.getMinutes();
 	
+	console.log(this.select_list.getSelectedItem());
 	
-	const allData = [];
+	console.log(this.searchKeyword);
+	
+	const searchKeyword = sessionStorage.getItem("searchKeyword");
+	const searchOption = sessionStorage.getItem("select_list");
+	if(searchKeyword == null || searchKeyword == ''){
+		console.log('searchOption : ' + searchOption + ' searchKeyword : ' + searchKeyword);
+	
+		const allData = [];
 	// 세션 forEach로 순환
 	Object.keys(sessionStorage).forEach(key => {
-		const value = sessionStorage.getItem(key);
+		if (key !== "searchKeyword" && key !== "select_list"){
+			const value = sessionStorage.getItem(key);
 		
 		// JSON 파싱
 		const parsedValue = JSON.parse(value);
 		
 		allData.push(parsedValue);
+		}
 	});
 		
 	allData.sort((a, b) => a.cnt - b.cnt);
+	console.log('! : ' , allData);
 
 	allData.forEach(item => {
 		const data = [
 			item.cnt,
 			item.title,
-			item.name,
 			item.text,
-			item.title
+			item.name,
+			item.time
+			
 		];
 
 		this.main_grid.addRow(data);
 	});
+	
+	
+		
+	}else{
+		//alert('검색어가 있습니다 : ' + '검색 옵션 : ' + sessionStorage.getItem("select_list") + ' ' + sessionStorage.getItem("searchKeyword"));
+		
+		console.log('searchOption : ' + searchOption + ' searchKeyword : ' + searchKeyword);
+		
+		
+		
+		const allData = [];
+		const filteredData = [];
+		
+		// 세션 forEach로 순환
+		Object.keys(sessionStorage).forEach(key => {
+			if (key !== "searchKeyword" && key !== "select_list"){
+				const value = sessionStorage.getItem(key);
 
+				// JSON 파싱
+				const parsedValue = JSON.parse(value);
+				console.log(parsedValue);
+				// console.log(parsedValue[searchOption] === searchKeyword);
+				
+				allData.push(parsedValue[searchOption]);
+				
+				
+				
+				// 검색 옵션이 ~인 value 값
+				if ((parsedValue[searchOption].toString()).includes(searchKeyword)){ // .toString은 cnt가 문자가 아니라서 변환
+					filteredData.push(parsedValue);
+					console.log('검색 옵션 있음!');
+					}
+				
+				}
+			});
+			
+		filteredData.sort((a, b) => a.cnt - b.cnt);
 
+		filteredData.forEach(item => {
+			const data = [
+				item.cnt,
+				item.title,
+				item.text,
+				item.name,
+				item.time
+			];
+
+			this.main_grid.addRow(data);
+		});
+	}
+	
 };
 
 function MainView*onInitDone()
@@ -106,7 +169,7 @@ function MainView*click_add_ok(comp, info, e)
 	};
 	
 	sessionStorage.setItem(`dataList${this.cnt}`,JSON.stringify(dataList));
-	
+	this.addBox.$ele.css("display", "none");
 	
 	
 	// 그리드에 추가
@@ -127,7 +190,8 @@ function MainView*click_add_ok(comp, info, e)
 
 function MainView*main_grid_select(comp, info, e)
 {
-
+	console.log("!!!!!!" + comp , +' ' , + info,  ' ' + e );
+	
 	var index = this.main_grid.colIndexOfCell(this.main_grid.getSelectedCells()[0]);
 	
 	//alert(this.main_grid.getCellText(index, 0));
@@ -187,16 +251,32 @@ function MainView*click_edit_ok(comp, info, e)
 		// 배열에서 특정 cnt 값을 찾아서 수정한다
 		if(parsedValue.cnt == this.cntS){
 			parsedValue.title = this.edit_title.getText();
-			parsedValue.name = this.edit_text.getText();
-			parsedValue.text = this.edit_user.getText();
+			parsedValue.text = this.edit_text.getText();
+			parsedValue.name = this.edit_user.getText();
 			parsedValue.time = nowTime;
 			
 			sessionStorage.setItem(key, JSON.stringify(parsedValue));
 			
 			console.log(`수정 : ${JSON.stringify(parsedValue)}`);
+			console.log(sessionStorage.getItem(key));
 		}
 		
 	});
 	// 캐시된 페이지를 로딩
 	location.reload();
+};
+
+function MainView*click_seartch_button(comp, info, e)
+{
+
+	if(this.search.getText()== ''){
+		sessionStorage.setItem("select_list", this.select_list.getSelectedItemValue());
+		sessionStorage.setItem("searchKeyword", this.search.getText());
+	} else{
+		sessionStorage.setItem("select_list", this.select_list.getSelectedItemValue());
+		sessionStorage.setItem("searchKeyword", this.search.getText());				
+	}
+	// 캐시된 페이지를 로딩
+	location.reload();
+
 };

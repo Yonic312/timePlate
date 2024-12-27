@@ -1,0 +1,8 @@
+{
+  "styleName": "timePlateApp_global",
+  "items": {
+    "_global_style_": "\n._global_style_\n{\n\tfont-size: 12px;\n\tfont-family: courier;\n\ttext-size-adjust: none;\n\n}\n",
+    "global_resp": "\r\n.global_resp\r\n{\r\n\t/* global_resp 는 body 에 추가된 클래스 입니다. */\r\n\r\n}\r\n\r\n/*가로모드*/\r\n@media screen and (orientation: landscape)\r\n{\r\n\t.global_resp\r\n\t{\r\n\t}\r\n}\r\n\r\n/*ios*/\r\n@supports (-webkit-overflow-scrolling: touch)\r\n{\r\n}\r\n\r\n/*tablet*/\r\n@media screen and (min-width:641px)\r\n{\r\n}\r\n",
+    "unselectable": ".unselectable {\n    user-select: none; /* 텍스트 선택 불가능 */\n    -webkit-user-select: none; /* 크롬, 사파리 */\n    -moz-user-select: none; /* 파이어폭스 */\n    -ms-user-select: none; /* 인터넷 익스플로러 */\n    \n    pointer-events: none; /* 클릭 불가능 */\n}"
+  }
+}

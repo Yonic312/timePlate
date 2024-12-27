@@ -1,0 +1,42 @@
+
+._global_style_
+{
+	font-size: 12px !important;
+	font-family: courier !important;
+	text-size-adjust: none !important;
+
+}
+
+.global_resp
+{
+	/* global_resp 는 body 에 추가된 클래스 입니다. */
+
+}
+
+/*가로모드*/
+@media screen and (orientation: landscape)
+{
+	.global_resp
+	{
+	}
+}
+
+/*ios*/
+@supports (-webkit-overflow-scrolling: touch)
+{
+}
+
+/*tablet*/
+@media screen and (min-width:641px)
+{
+}
+
+.unselectable {
+    user-select: none !important; /* 텍스트 선택 불가능 */
+    -webkit-user-select: none !important; /* 크롬, 사파리 */
+    -moz-user-select: none !important; /* 파이어폭스 */
+    -ms-user-select: none !important; /* 인터넷 익스플로러 */
+    
+    pointer-events: none !important; /* 클릭 불가능 */
+}
+
